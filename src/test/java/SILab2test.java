@@ -1,46 +1,57 @@
-# SI_2022_lab2_181542
-Анастасија Богдановска 181542
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-#2. Control Flow Graph
-![](../SI labs2/New folder/final.jpg)
+import java.util.*;
 
-#3. Цикломатска комплексност
-   Графот има 23 темиња и 30 ребра па за да ја одредиме комплексноста пресметуваме V(G) = Edges - Nodes + 2 каде што Еdges = 26 е бројот на рабови и Nodes = 21 е бројот на јазли. V(G) 30 - 23 + 2 = 9. Цикломатската комплексност е 9
+import static org.junit.jupiter.api.Assertions.*;
 
+class SILab2test {
 
-#5. Test Cases
-         
+    private List<String> createList(String... strings) {
+        return new ArrayList<>(Arrays.asList(strings));
+    }
+     @BeforeAll
+    public static void init(){
+       System.out.println("BeforeAll init() method called");
+     }
 
-        @Test
-        void everyStatementTestCriteria() {
+     @AfterAll
+    public static void cleanUp(){
+        System.out.println("After All cleanUp() method called");
+    }
+
+    @Test
+    void everyStatementTestCriteria() {
         IllegalArgumentException exception = null;
         exception = assertThrows(IllegalArgumentException.class, () -> SILab2.function(createList()));
+
         assertTrue(exception.getMessage().contains("List length should be greater than 0"));
         exception = assertThrows(IllegalArgumentException.class, () -> SILab2.function(createList("0", "#", "#")));
-       
+
         assertTrue(exception.getMessage().contains("List length should be a perfect square"));
         List<String> list = new ArrayList<>();
-      
+
         list= createList("#", "#", "#", "#", "#", "#", "#", "#", "#");
         assertEquals(list, SILab2.function(list));
     }
 
-
-
-
-        @Test
-        public void everyBranchTestCriteria() {
+    @Test
+    public void everyBranchTestCriteria() {
         IllegalArgumentException exception = null;
+
         exception = assertThrows(IllegalArgumentException.class, () -> SILab2.function(createList()));
         assertTrue(exception.getMessage().contains("List length should be greater than 0"));
-        
+
         exception = assertThrows(IllegalArgumentException.class, () -> SILab2.function(createList("0", "0")));
         assertTrue(exception.getMessage().contains("List length should be a perfect square"));
-       
+
         List<String> list = new ArrayList<>();
         list= createList("#", "#", "0", "#", "0", "0", "0", "0", "#", "0", "0", "#", "0", "#", "#", "0");
-        
+
         List<String> list2 = new ArrayList<>();
         list2= createList("#", "#", "2", "#", "2", "1", "0", "2", "#", "2", "2", "#", "2", "#", "#", "2");
         assertEquals(list2,  SILab2.function(list));
     }
+}
+
